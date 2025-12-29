@@ -1,0 +1,11 @@
+SELECT
+  start_station_name,
+  COUNT(*) AS trips,
+  AVG(TIMESTAMP_DIFF(end_time, start_time, MINUTE)) AS avg_min
+FROM `sylvan-pivot-479415-f9.cyclistic.trips_2019_2020_clean_v2`
+WHERE usertype = 'casual'
+  AND TIMESTAMP_DIFF(end_time, start_time, MINUTE) >= 5
+  AND start_station_name NOT IN ('HQ QR', 'DIVVY HQ')
+GROUP BY start_station_name
+ORDER BY trips DESC
+LIMIT 10;
