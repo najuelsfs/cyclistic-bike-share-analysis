@@ -1,0 +1,19 @@
+#suposicion de que los miembros usan mas el servicio en dias laborales y los ususarios ocasionales en fines de semana.
+
+SELECT 
+  usertype,
+  CASE EXTRACT(DAYOFWEEK FROM start_time) 
+    WHEN 1 Then 'sunday'
+    WHEN 2 Then 'monday'
+    WHEN 3 Then 'tuesday'
+    WHEN 4 Then 'wednesday'
+    WHEN 5 Then 'thursday'
+    WHEN 6 Then 'friday'
+    WHEN 7 Then 'saturday'
+    END AS day_of_week,
+
+   COUNT(*) AS total_trips
+ FROM `sylvan-pivot-479415-f9.cyclistic.Trips_2019_2020` 
+ WHERE tripduration_min BETWEEN 1 AND 1440
+ Group BY day_of_week, usertype
+ ORDER BY day_of_week,usertype;
