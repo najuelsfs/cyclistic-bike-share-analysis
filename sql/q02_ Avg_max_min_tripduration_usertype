@@ -1,0 +1,10 @@
+Comparar tiempos de uso minimos, maximos y promedios por usertype
+SELECT  
+  usertype,
+  ROUND(AVG(tripduration_min),2) AS avg_duration_min,
+  MIN(tripduration_min) AS min_duration_min,
+  MAX(tripduration_min) AS max_duration_min
+FROM `sylvan-pivot-479415-f9.cyclistic.Trips_2019_2020` 
+WHERE tripduration_min > 1
+  AND tripduration_min <= 1440
+GROUP BY usertype;
