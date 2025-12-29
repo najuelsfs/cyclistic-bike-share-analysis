@@ -1,0 +1,27 @@
+SELECT
+  CASE EXTRACT(DAYOFWEEK FROM start_time)
+    WHEN 1 THEN 'Domingo'
+    WHEN 2 THEN 'Lunes'
+    WHEN 3 THEN 'Martes'
+    WHEN 4 THEN 'Miércoles'
+    WHEN 5 THEN 'Jueves'
+    WHEN 6 THEN 'Viernes'
+    WHEN 7 THEN 'Sábado'
+  END AS day_of_week,
+  usertype,
+  ROUND(AVG(tripduration_min), 2) AS avg_duration_min
+FROM `sylvan-pivot-479415-f9.cyclistic.Trips_2019_2020`
+WHERE tripduration_min BETWEEN 1 AND 1440
+GROUP BY day_of_week, usertype
+ORDER BY
+  CASE day_of_week
+    WHEN 'Lunes' THEN 1
+    WHEN 'Martes' THEN 2
+    WHEN 'Miércoles' THEN 3
+    WHEN 'Jueves' THEN 4
+    WHEN 'Viernes' THEN 5
+    WHEN 'Sábado' THEN 6
+    WHEN 'Domingo' THEN 7
+  END,
+  usertype;
+  #La duración promedio de los viajes de usuarios ocasionales es consistentemente mayor que la de los miembros, con un incremento marcado durante los fines de semana, lo que refuerza la hipótesis de un uso recreativo del servicio.
