@@ -15,7 +15,7 @@ to identify opportunities for membership conversion.
 - High-volume casual usage is concentrated around tourist and recreational stations
 
 ## Tableau Dashboard
-https://public.tableau.com/...
+https://public.tableau.com/views/CyclisticBikeShare_17664594950260/Dashboard3?:language=es-ES&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link
 
 ## Business Recommendation
 Target casual riders at high-volume recreational stations during weekends
