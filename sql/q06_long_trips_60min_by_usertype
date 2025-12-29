@@ -1,0 +1,7 @@
+SELECT
+  usertype,
+  COUNT(*) AS long_trips
+FROM sylvan-pivot-479415-f9.cyclistic.Trips_2019_2020
+WHERE tripduration_min >=60
+AND tripduration_min<=1440
+Group BY usertype;
