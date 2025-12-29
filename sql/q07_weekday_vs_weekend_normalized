@@ -1,0 +1,25 @@
+WITH base AS (
+  SELECT
+    usertype,
+    CASE
+      WHEN EXTRACT(DAYOFWEEK FROM start_time) IN (1, 7) THEN 'Weekend'
+      ELSE 'Weekday'
+    END AS day_type,
+    COUNT(*) AS total_trips,
+    AVG(tripduration_min) AS avg_duration
+  FROM `sylvan-pivot-479415-f9.cyclistic.Trips_2019_2020`
+  WHERE tripduration_min >= 1
+  GROUP BY usertype, day_type
+)
+
+SELECT
+  usertype,
+  day_type,
+  total_trips,
+  ROUND(avg_duration, 2) AS avg_duration_min,
+  CASE
+    WHEN day_type = 'Weekday' THEN ROUND(total_trips / 5, 0)
+    ELSE ROUND(total_trips / 2, 0)
+  END AS trips_per_day
+FROM base
+ORDER BY usertype, day_type;
